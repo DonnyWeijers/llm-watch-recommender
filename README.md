@@ -75,29 +75,30 @@ popularity baseline (hits in every variant against 0), and the parsing gains, wh
 
 ## Benchmark: which model for which job
 
-`bench_models.py` runs the three AI jobs on the same time split (2 users × 2 cutoffs = 4 runs per config):
+`bench_models.py` runs the three AI jobs on the same time split (2 users × 2 cutoffs = 4 runs per config).
+Amounts are in euros, converted from OpenRouter's billing in US dollars at 0.86.
 
 | Config | Cost (4 runs) | Candidates: hits (no other source) | Pick: hits@12 | Reasons |
 |---|---|---|---|---|
-| Gemini 3.7 Flash | $0.205 | 8 (6) | 6 | 100 % covered, all within limits |
-| GPT-6 Luna, low effort | $0.014 | 5 (3) | 8 | 100 %, all within limits |
-| **GPT-6 Luna, medium (chosen for reasons)** | **$0.017** | 8 (4) | 6 | 100 %, 2 % over 90 characters |
-| GPT-6 Luna, xhigh | $0.034 | 8 (4) | 6 | 100 %, all within limits |
+| Gemini 3.7 Flash | €0.18 | 8 (6) | 6 | 100 % covered, all within limits |
+| GPT-6 Luna, low effort | €0.012 | 5 (3) | 8 | 100 %, all within limits |
+| **GPT-6 Luna, medium (chosen for reasons)** | **€0.015** | 8 (4) | 6 | 100 %, 2 % over 90 characters |
+| GPT-6 Luna, xhigh | €0.029 | 8 (4) | 6 | 100 %, all within limits |
 
 For the candidates job alone (where a smarter model could help):
 
-| Config | $ per call | Hits (no other source) | Per year (3 users, weekly) |
+| Config | € per call | Hits (no other source) | Per year (3 users, weekly) |
 |---|---|---|---|
-| GPT-6 Sol, max effort | 0.036 | **14 (8)** | ~$5.70 |
-| Claude Opus 5.5 | 0.030 | 12 (8) | ~$4.60 |
-| DeepSeek V4.1 Flash, high | 0.004 | 10 (7) | ~$0.50 |
-| GPT-6 Luna, medium | 0.0008 | 8–10 (4–6) | ~$0.12 |
+| GPT-6 Sol, max effort | 0.031 | **14 (8)** | ~€4.90 |
+| Claude Opus 5.5 | 0.026 | 12 (8) | ~€4.00 |
+| DeepSeek V4.1 Flash, high | 0.003 | 10 (7) | ~€0.45 |
+| GPT-6 Luna, medium | 0.0007 | 8–10 (4–6) | ~€0.10 |
 
 - The same model varies 2–5 hits between runs, so only the larger model stood out (+3–4 hits).
 - The replay flatters the AI: it knows which older titles became hits after the cutoff. Compare configs with each
   other, not with the TMDB sources.
 - Defaults: GPT-6 Luna (medium) for the reasons, DeepSeek V4.1 Flash (high) for the candidates: the most consistent
-  cheap model, at about $0.50 a year.
+  cheap model, at about €0.45 a year.
 
 ## Running it
 
